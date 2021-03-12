@@ -3,23 +3,42 @@ setTimeout(script, 1500);
 function script() {
   var lines = [];
 
-getCanceledOrders(lines);
+  getCanceledOrders(lines);
 
-removeLines(lines);
+  removeLines(lines);
 
-function getCanceledOrders(lines) {
-  document.querySelectorAll('.order-resume-info').forEach(line => {
-    if (line.querySelector('.status').textContent.includes('cancelada')) {
-      lines.push(line);
-    }
-  })
-}
+  getRemainingOrders()
 
-function removeLines(lines) {
-  lines.forEach(line => {
-    line.remove();
-  })
-}
+
+  function getRemainingOrders() {
+    document.querySelectorAll('.order-resume-info').forEach(line => {
+      if (line.querySelector('td').className.includes('type-buy')) {
+        var price = line.querySelector('.value-buy').textContent.substr(3).replace('.', '').replace(',', '.')
+        var amount = line.querySelector('.value-qtd').textContent.slice(0, -5).replace(',', '.');
+        var total = price * amount;
+        total = total.toFixed(2)
+        console.log(price, amount, total);
+        console.log(line.querySelector('.status > span').innerHTML)
+        line.querySelector('.status > span').innerHTML = `R$ ${total}`
+      }
+    })
+  }
+
+
+
+  function getCanceledOrders(lines) {
+    document.querySelectorAll('.order-resume-info').forEach(line => {
+      if (line.querySelector('.status').textContent.includes('cancelada')) {
+        lines.push(line);
+      }
+    })
+  }
+
+  function removeLines(lines) {
+    lines.forEach(line => {
+      line.remove();
+    })
+  }
 }
 
 
