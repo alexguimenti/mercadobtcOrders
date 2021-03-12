@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Mercado Bitcoin Orders Adaptation",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.mercadobitcoin.com.br/plataforma/painel*"
+      ],
+      "js": ["script.js"]
+    }
+  ]
+}
