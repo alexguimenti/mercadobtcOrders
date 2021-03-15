@@ -24,11 +24,11 @@ function script() {
     document.querySelectorAll('.order-resume-info').forEach(line => {
       if (line.querySelector('td').className.includes('type-buy')) {
         var price = line.querySelector('.value-buy').textContent.substr(3).replace('.', '').replace(',', '.')
-        var amount = line.querySelector('.value-qtd').textContent.replace('.', '').slice(0, -5).replace(',', '.');
+        var amount = line.querySelector('.value-qtd').textContent.replace('.', '').slice(0, -4).replace(',', '.');
         var total = price * amount;
         total = total.toFixed(2)
-        // console.log(price, amount, total);
-        // console.log(line.querySelector('.status > span').innerHTML)
+        console.log(price, amount, total);
+        console.log(line.querySelector('.status > span').innerHTML)
         line.querySelector('.status > span').innerHTML = `R$ ${total}`
       }
       if (line.querySelector('td').className.includes('type-sell')) {
